@@ -1,4 +1,4 @@
-implementation 'com.github.Dinhvietanhk5:NSCustomUtils:Tag'
+implementation 'com.github.Dinhvietanhk5:NSExtension:Tag'
 
 
 Sub-libraries
