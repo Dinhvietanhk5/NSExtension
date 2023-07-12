@@ -433,6 +433,8 @@ class NSEdittext : LinearLayout {
             typedArray.getDimensionPixelSize(R.styleable.NSEdittext_errorPaddingTop, 0)
                 .toFloat()
         val mBackground = typedArray.getResourceId(R.styleable.NSEdittext_errorBackground, -1)
+        val fontId = typedArray.getResourceId(R.styleable.NSEdittext_android_fontFamily, -1)
+
         if (mPaddingHorizontal != 0f) {
             mPaddingStart = mPaddingHorizontal
             mPaddingEnd = mPaddingHorizontal
@@ -445,6 +447,11 @@ class NSEdittext : LinearLayout {
 
             if (mSize > 0) setTextSize(TypedValue.COMPLEX_UNIT_PX, mSize.toFloat())
             typeface = Typeface.defaultFromStyle(mStyle)
+            if (fontId != -1) {
+                val fontFamily = ResourcesCompat.getFont(context, fontId)
+                setTypeface(fontFamily, mStyle)
+            } else
+                typeface = Typeface.defaultFromStyle(mStyle)
 
             if (mBackground != -1) {
                 ContextCompat.getDrawable(context, mBackground)?.let {
