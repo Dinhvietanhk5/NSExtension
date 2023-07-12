@@ -1,17 +1,20 @@
 package com.newsoft.nsedittext
 
+import android.R.attr
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
-import android.graphics.Color.red
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.InputType
+import android.text.SpannableString
+import android.text.Spanned
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.text.style.TypefaceSpan
 import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
@@ -23,10 +26,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import com.newsoft.nsedittext.custom.CustomTypefaceSpan
 import com.newsoft.nsedittext.validatetor.ValidateTor
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
+
 
 @SuppressLint("AppCompatCustomView")
 class NSEdittext : LinearLayout {
@@ -172,7 +177,6 @@ class NSEdittext : LinearLayout {
 
         editText?.apply {
             setTextColor(mEdtColor)
-            hint = mHint
             setHintTextColor(mEdtColorHint)
 
             imeOptions = mImeOptions
@@ -182,6 +186,8 @@ class NSEdittext : LinearLayout {
                 setTypeface(fontFamily, mEdtStyle)
             } else
                 typeface = Typeface.defaultFromStyle(mEdtStyle)
+
+            setFontTextHint(mHint!!)
 
             gravity = mGravity
 
@@ -344,6 +350,18 @@ class NSEdittext : LinearLayout {
                 Log.e("NSEdittext", "error format number $text")
             inputType = InputType.TYPE_CLASS_NUMBER
         }
+    }
+
+    private fun EditText.setFontTextHint(mHint: String) {
+        val typefaceSpan: TypefaceSpan = CustomTypefaceSpan(typeface)
+        val spannableString = SpannableString(mHint)
+        spannableString.setSpan(
+            typefaceSpan,
+            0,
+            spannableString.length,
+            Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+        )
+        hint = spannableString
     }
 
     @SuppressLint("ClickableViewAccessibility")
