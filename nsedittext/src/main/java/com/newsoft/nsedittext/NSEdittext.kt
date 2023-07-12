@@ -36,39 +36,11 @@ class NSEdittext : LinearLayout {
     var tvError: TextView? = null
     var imvLeft: ImageView? = null
     var validateTor = ValidateTor()
-
-    //
-//    private var mPaddingTop = 0f
-//    private var mPaddingBottom = 0f
-//    private var mPaddingStart = 0f
-//    private var mPaddingEnd = 0f
-//    private var mPaddingVertical = 0f
-//    private var mPaddingHorizontal = 0f
-//    private var mEtBg = 0
-//    private var mEdtColorHint = 0
-//    private var mFont: String? = null
-//    private var mText: String? = ""
-//    private var mHint: String? = ""
     private var mInputType = 0
     private var mEdtSize = 0
-
-    //    private var mImeOptions = 0
-//    private var mEdtStyle = 0
-//    private var mGravity = 0
-//    private var mEdtSize = 0
-//    private var mEdtColor = 0
-//    private var mEdtAllCaps = false
-//    protected var emptyAllowed = false
-//    protected var classType: String? = null
     protected var customRegexp = ""
     protected var msgError = ""
     private var mUnitMoney = ""
-//    protected var customFormat: String? = null
-//    protected var errorString: String? = null
-//    protected var minNumber = 0
-//    protected var maxNumber = 0
-//    protected var floatminNumber = 0f
-//    protected var floatmaxNumber = 0f
 
     //TODO: value validation
     private var moneyFormatCharacter = 0
@@ -192,6 +164,8 @@ class NSEdittext : LinearLayout {
                 .toFloat()
         customRegexp = typedArray.getString(R.styleable.NSEdittext_customRegexp).toString()
 
+        val fontId = typedArray.getResourceId(R.styleable.NSEdittext_android_fontFamily, -1)
+
         typedArray.getString(R.styleable.NSEdittext_unit_number)?.let {
             mUnitMoney = it
         }
@@ -202,11 +176,22 @@ class NSEdittext : LinearLayout {
             setHintTextColor(mEdtColorHint)
 
             imeOptions = mImeOptions
-            typeface = Typeface.defaultFromStyle(mEdtStyle)
+
+            if (fontId != -1) {
+                val fontFamily = ResourcesCompat.getFont(context, fontId)
+                setTypeface(fontFamily, mEdtStyle)
+            } else
+                typeface = Typeface.defaultFromStyle(mEdtStyle)
+
             gravity = mGravity
 
 
-            if (mEdtColorHint != -1) setHintTextColor( ContextCompat.getColor(context,mEdtColorHint))
+            if (mEdtColorHint != -1) setHintTextColor(
+                ContextCompat.getColor(
+                    context,
+                    mEdtColorHint
+                )
+            )
             if (mEdtSize > 0)
                 setTextSize(TypedValue.COMPLEX_UNIT_PX, mEdtSize.toFloat())
             if (mText != null)
@@ -410,7 +395,7 @@ class NSEdittext : LinearLayout {
         val mText = typedArray.getString(R.styleable.NSEdittext_errorText)
         val mColor = typedArray.getColor(
             R.styleable.NSEdittext_errorTextColor,
-             ContextCompat.getColor(context,R.color.red)
+            ContextCompat.getColor(context, R.color.red)
         )
         val mSize =
             typedArray.getDimensionPixelSize(R.styleable.NSEdittext_errorTextSize, mEdtSize)

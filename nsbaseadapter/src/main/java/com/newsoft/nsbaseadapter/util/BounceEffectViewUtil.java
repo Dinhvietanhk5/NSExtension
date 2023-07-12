@@ -9,12 +9,7 @@ import android.view.animation.ScaleAnimation;
 public class BounceEffectViewUtil {
 
     public static void addBounceEffect(View view) {
-        view.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return onButtonTouch(v, event);
-            }
-        });
+        view.setOnTouchListener(BounceEffectViewUtil::onButtonTouch);
     }
 
     private static boolean onButtonTouch(View button, MotionEvent event) {
