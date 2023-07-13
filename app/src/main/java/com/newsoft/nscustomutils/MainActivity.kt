@@ -35,7 +35,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                     .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
                     .setTitle("notification")
                     .setTextColor(getCompatColor(com.newsoft.nsedittext.R.color.red))
-                    .setDialogBackgroundColor(getCompatColor(R.color.white))
+                    .setDialogBackgroundColor(getCompatColor(R.color.black))
                     .setTextGravity(Gravity.CENTER)
                     .setMessage("msg")
                 val dialog = builder.show()

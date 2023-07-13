@@ -198,11 +198,11 @@ public class CFAlertDialog extends AppCompatDialog {
         // Message
         setMessage(params.message);
 
-        // Text Style
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            dialogTitleTextView.setTextAppearance(params.textStyleTitle);
-//            dialogMessageTextView.setTextAppearance(params.textStyleMsg);
-//        }
+//         Text Style
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            dialogTitleTextView.setTextAppearance(params.textStyleTitle);
+            dialogMessageTextView.setTextAppearance(params.textStyleMsg);
+        }
 
         // Cancel
         setCancelable(params.cancelable);
