@@ -6,12 +6,15 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View.OnTouchListener
 import android.widget.EditText
 import android.widget.TextView
 import com.newsoft.nscustomutils.databinding.ActivityMainBinding
+import com.newsoft.nsdialog.CFAlertDialog
+import com.newsoft.nsextension.ext.context.getCompatColor
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
@@ -24,6 +27,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     @SuppressLint("ClickableViewAccessibility", "WrongThread")
     override fun onCreate() {
+        binding.apply {
+            btnNext.setOnClickListener {
+//                edtMoney.validate()
+
+                val builder = CFAlertDialog.Builder(this@MainActivity)
+                    .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+                    .setTitle("notification")
+                    .setTextColor(getCompatColor(com.newsoft.nsedittext.R.color.red))
+                    .setDialogBackgroundColor(getCompatColor(R.color.white))
+                    .setTextGravity(Gravity.CENTER)
+                    .setMessage("msg")
+                val dialog = builder.show()
+            }
+        }
 
 //        checkHideKeyboardOnTouchScreen(packed)
 //        switchFragment(newInstance<MainFragment>("type" to TypeConnectEnums.NEW_INVITE))

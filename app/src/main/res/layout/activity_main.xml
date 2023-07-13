@@ -9,14 +9,6 @@
     android:orientation="vertical"
     tools:context=".TestActivity">
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/btnNext"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:background="@color/colorPrimary"-->
-    <!--        android:gravity="center"-->
-    <!--        android:paddingVertical="12dp"-->
-    <!--        android:text="next" />-->
 
     <!--    &lt;!&ndash;    <EditText&ndash;&gt;-->
     <!--    &lt;!&ndash;        android:id="@+id/edt"&ndash;&gt;-->
@@ -52,11 +44,20 @@
         android:paddingVertical="12dp"
         android:hint="pass"
         android:textSize="20sp"
-
         android:textColorHint="@color/black"
-        android:fontFamily="@font/robotoregular"
+        android:fontFamily="@font/robotomedium"
         android:textColor="@color/black"
-        app:inputType="pass" />
+        app:inputType="phone" />
+
+
+    <TextView
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:paddingVertical="12dp"
+        android:text="next" />
 
     <!--    <ImageView-->
     <!--        android:id="@+id/image"-->

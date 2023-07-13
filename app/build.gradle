@@ -50,6 +50,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation project(path: ':nsedittext')
+    implementation project(path: ':nsdialog')
 //
 //    // Get Image/Video
 //    implementation 'io.github.ParkSangGwon:tedimagepicker:1.2.8'

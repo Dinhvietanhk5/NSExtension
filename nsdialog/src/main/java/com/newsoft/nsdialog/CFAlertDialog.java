@@ -7,9 +7,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -196,15 +198,11 @@ public class CFAlertDialog extends AppCompatDialog {
         // Message
         setMessage(params.message);
 
-        // Text color
-        if (params.textColor != -1) {
-            setTitleColor(params.textColor);
-            setMessageColor(params.textColor);
-        }
-
         // Text Style
-        dialogTitleTextView.setTextAppearance(params.textStyleTitle);
-        dialogMessageTextView.setTextAppearance(params.textStyleMsg);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            dialogTitleTextView.setTextAppearance(params.textStyleTitle);
+//            dialogMessageTextView.setTextAppearance(params.textStyleMsg);
+//        }
 
         // Cancel
         setCancelable(params.cancelable);
@@ -247,6 +245,12 @@ public class CFAlertDialog extends AppCompatDialog {
             setFooterView(params.footerView);
         } else if (params.footerViewId != -1) {
             setFooterView(params.footerViewId);
+        }
+
+        // Text color
+        if (params.textColor != 0) {
+            setTitleColor(params.textColor);
+            setMessageColor(params.textColor);
         }
     }
 
@@ -423,6 +427,7 @@ public class CFAlertDialog extends AppCompatDialog {
         adjustBackgroundGravity();
         adjustDialogLayoutParams();
     }
+
 
     /**
      * @param textGravity @see android.view.Gravity
@@ -625,9 +630,10 @@ public class CFAlertDialog extends AppCompatDialog {
         }
 
         // Button text colors
-        button.setTextColor(actionButton.textColor);
-        if (actionButton.styleButton != -1)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && actionButton.styleButton != -1) {
             button.setTextAppearance(actionButton.styleButton);
+        }
+        button.setTextColor(actionButton.textColor);
     }
 
     public void setItems(String[] items, final OnClickListener onClickListener) {
@@ -1097,7 +1103,7 @@ public class CFAlertDialog extends AppCompatDialog {
         private int dialogOuterMargin = -1;
         private CharSequence message, title;
         private @ColorInt
-        int textColor = -1;
+        int textColor = 0;
         int textStyleButton = R.style.CFDialog_Button;
         int textStyleTitle = R.style.CFDialog_Title;
         int textStyleMsg = R.style.CFDialog_Message;
