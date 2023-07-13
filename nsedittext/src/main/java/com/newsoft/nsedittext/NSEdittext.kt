@@ -246,23 +246,27 @@ class NSEdittext : LinearLayout {
                 drawerEndClickNotTypePass()
             }
 
-            when (mInputType) {
-                Constant.TEXT_MONEY -> setTextTypeMoney(this)
-                Constant.TEXT_PASS -> setTextTypePass()
-                Constant.TEXT_PHONE -> inputType = InputType.TYPE_CLASS_PHONE
-                Constant.TEXT_EMAIL -> inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
-                Constant.TEXT_DATE -> inputType = InputType.TYPE_CLASS_DATETIME
-                Constant.TEXT_NUMERIC,
-                Constant.TEXT_NUMERIC_RANGE,
-                Constant.TEXT_FLOAT_NUMERIC_RANGE -> inputType = InputType.TYPE_CLASS_NUMBER
-
-                else -> inputType = InputType.TYPE_CLASS_TEXT
-            }
+            this.setInputType()
 
             layoutParams = LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
+        }
+    }
+
+    private fun EditText.setInputType() {
+        when (mInputType) {
+            Constant.TEXT_MONEY -> setTextTypeMoney(this)
+            Constant.TEXT_PASS -> setTextTypePass()
+            Constant.TEXT_PHONE -> inputType = InputType.TYPE_CLASS_PHONE
+            Constant.TEXT_EMAIL -> inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+            Constant.TEXT_DATE -> inputType = InputType.TYPE_CLASS_DATETIME
+            Constant.TEXT_NUMERIC,
+            Constant.TEXT_NUMERIC_RANGE,
+            Constant.TEXT_FLOAT_NUMERIC_RANGE -> inputType = InputType.TYPE_CLASS_NUMBER
+
+            else -> inputType = InputType.TYPE_CLASS_TEXT
         }
     }
 
@@ -606,6 +610,7 @@ class NSEdittext : LinearLayout {
 
     fun setmInputType(mInputType: Int) {
         this.mInputType = mInputType
+        this.editText?.setInputType()
     }
 
     fun setmImeOptions(mImeOptions: Int) {

@@ -29,16 +29,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun onCreate() {
         binding.apply {
             btnNext.setOnClickListener {
-//                edtMoney.validate()
+                edtMoney.setmInputType(4)
 
-                val builder = CFAlertDialog.Builder(this@MainActivity)
-                    .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
-                    .setTitle("notification")
-                    .setTextColor(getCompatColor(com.newsoft.nsedittext.R.color.red))
-                    .setDialogBackgroundColor(getCompatColor(R.color.black))
-                    .setTextGravity(Gravity.CENTER)
-                    .setMessage("msg")
-                val dialog = builder.show()
+//                val builder = CFAlertDialog.Builder(this@MainActivity)
+//                    .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+//                    .setTitle("notification")
+//                    .setTextColor(getCompatColor(com.newsoft.nsedittext.R.color.red))
+//                    .setDialogBackgroundColor(getCompatColor(R.color.black))
+//                    .setTextGravity(Gravity.CENTER)
+//                    .setMessage("msg")
+//                val dialog = builder.show()
             }
         }
 
