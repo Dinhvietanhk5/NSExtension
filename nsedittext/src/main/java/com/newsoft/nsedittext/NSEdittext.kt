@@ -156,6 +156,9 @@ class NSEdittext : LinearLayout {
             typedArray.getResourceId(R.styleable.NSEdittext_drawableIconPassVisible, -1)
         val mText = typedArray.getString(R.styleable.NSEdittext_android_text)
 
+
+        val mDrawablePadding =
+            typedArray.getDimensionPixelSize(R.styleable.NSEdittext_android_drawablePadding, -1)
         val mPaddingVertical =
             typedArray.getDimensionPixelSize(R.styleable.NSEdittext_android_paddingVertical, 0)
                 .toFloat()
@@ -192,6 +195,9 @@ class NSEdittext : LinearLayout {
             setHintTextColor(mEdtColorHint)
             if (mDrawableStart != -1)
                 setCompoundDrawablesWithIntrinsicBounds(mDrawableStart, 0, 0, 0)
+
+            if (mDrawablePadding != -1)
+                compoundDrawablePadding = mDrawablePadding
 
             imeOptions = mImeOptions
 
