@@ -59,6 +59,9 @@
         <attr name="floatminNumber" format="float" />
         <attr name="floatmaxNumber" format="float" />
 
+        <attr name="drawableIconPassInvisible" format="reference|color" />
+        <attr name="drawableIconPassVisible" format="reference|color" />
+
         <attr name="errorBackground" format="reference|color" />
         <attr name="errorPaddingStart" format="dimension" />
         <attr name="errorPaddingEnd" format="dimension" />

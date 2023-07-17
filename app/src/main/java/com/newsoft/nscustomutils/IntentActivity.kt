@@ -2,6 +2,8 @@ package com.newsoft.nscustomutils
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
+import com.newsoft.nsextension.ext.context.finishActivityForResultExt
 
 class IntentActivity : AppCompatActivity() {
 
@@ -14,8 +16,8 @@ class IntentActivity : AppCompatActivity() {
 
 //        tvTitle.text = title
 
-//        tvTitle.setOnClickListener {
-//            finishActivityForResultExt("intemnt" to 1)
-//        }
+        findViewById<TextView>(R.id.tvTitle).setOnClickListener {
+            finishActivityForResultExt("intemnt" to 1)
+        }
     }
 }

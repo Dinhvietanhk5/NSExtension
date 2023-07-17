@@ -1,6 +1,5 @@
 package com.newsoft.nsedittext
 
-import android.R.attr
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
@@ -43,6 +42,8 @@ class NSEdittext : LinearLayout {
     var validateTor = ValidateTor()
     private var mInputType = 0
     private var mEdtSize = 0
+    private var mDrawableIconPassInvisible = 0
+    private var mDrawableIconPassVisible = 0
     protected var customRegexp = ""
     protected var msgError = ""
     private var mUnitMoney = ""
@@ -93,6 +94,7 @@ class NSEdittext : LinearLayout {
      *
      * @param attrs
      */
+    @SuppressLint("MissingInflatedId")
     private fun init(context: Context, attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(
             attrs,
@@ -144,10 +146,14 @@ class NSEdittext : LinearLayout {
         mEdtSize =
             typedArray.getDimensionPixelSize(R.styleable.NSEdittext_android_textSize, 36)
 
-//       val mValidationType = NSEdittext.ValidationType.values()
-//                [typedArray.getInt(R.styleable.NSEdittext_pattern, 0)];
         val mEtBg = typedArray.getResourceId(R.styleable.NSEdittext_android_background, -1)
         val mDrawableEnd = typedArray.getResourceId(R.styleable.NSEdittext_android_drawableEnd, -1)
+        val mDrawableStart =
+            typedArray.getResourceId(R.styleable.NSEdittext_android_drawableStart, -1)
+        mDrawableIconPassInvisible =
+            typedArray.getResourceId(R.styleable.NSEdittext_drawableIconPassInvisible, -1)
+        mDrawableIconPassVisible =
+            typedArray.getResourceId(R.styleable.NSEdittext_drawableIconPassVisible, -1)
         val mText = typedArray.getString(R.styleable.NSEdittext_android_text)
 
         val mPaddingVertical =
@@ -175,9 +181,17 @@ class NSEdittext : LinearLayout {
             mUnitMoney = it
         }
 
+        if (mDrawableEnd != -1) {
+            imvLeft?.visibility = View.VISIBLE
+            imvLeft?.setImageResource(mDrawableEnd)
+        } else
+            imvLeft?.visibility = View.GONE
+
         editText?.apply {
             setTextColor(mEdtColor)
             setHintTextColor(mEdtColorHint)
+            if (mDrawableStart != -1)
+                setCompoundDrawablesWithIntrinsicBounds(mDrawableStart, 0, 0, 0)
 
             imeOptions = mImeOptions
 
@@ -271,7 +285,6 @@ class NSEdittext : LinearLayout {
     }
 
     private fun setTextTypeMoney(editText: EditText) {
-        Log.e("setTextTypeMoney", " ")
         var current = ""
         var selectionEdt = 0
         var money = 0L
@@ -371,13 +384,14 @@ class NSEdittext : LinearLayout {
     @SuppressLint("ClickableViewAccessibility")
     private fun setTextTypePass() {
         editText?.apply {
-            imvLeft!!.setImageResource(R.drawable.ic_pass_invisible)
+            imvLeft!!.visibility = VISIBLE
+            imvLeft!!.setImageResource(if (mDrawableIconPassInvisible != -1) mDrawableIconPassInvisible else R.drawable.ic_pass_invisible)
             imvLeft?.setOnClickListener {
                 if (transformationMethod == HideReturnsTransformationMethod.getInstance()) {
                     transformationMethod = PasswordTransformationMethod.getInstance()
-                    imvLeft!!.setImageResource(R.drawable.ic_pass_invisible)
+                    imvLeft!!.setImageResource(if (mDrawableIconPassInvisible != -1) mDrawableIconPassInvisible else R.drawable.ic_pass_invisible)
                 } else {
-                    imvLeft!!.setImageResource(R.drawable.ic_pass_visible)
+                    imvLeft!!.setImageResource(if (mDrawableIconPassVisible != -1) mDrawableIconPassVisible else R.drawable.ic_pass_visible)
                     transformationMethod = HideReturnsTransformationMethod.getInstance()
                 }
             }

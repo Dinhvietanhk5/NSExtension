@@ -1,20 +1,17 @@
 package com.newsoft.nscustomutils
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View.OnTouchListener
 import android.widget.EditText
-import android.widget.TextView
+import androidx.activity.result.ActivityResult
 import com.newsoft.nscustomutils.databinding.ActivityMainBinding
-import com.newsoft.nsdialog.CFAlertDialog
 import com.newsoft.nsextension.ext.context.getCompatColor
+import com.newsoft.nsextension.ext.context.launcher_result.BetterActivityResult
+import com.newsoft.nsextension.ext.context.startActivityExt
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
@@ -22,14 +19,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 //    protected val activityLauncher: BetterActivityResult<Intent, ActivityResult> =
 //        BetterActivityResult.r
 
-//    protected val activityLauncher: BetterActivityResult<Intent, ActivityResult> =
-//        BetterActivityResult.registerActivityForResult(this)
+    protected val activityLauncher: BetterActivityResult<Intent, ActivityResult> =
+        BetterActivityResult.registerActivityForResult(this)
 
     @SuppressLint("ClickableViewAccessibility", "WrongThread")
     override fun onCreate() {
         binding.apply {
             btnNext.setOnClickListener {
-                edtMoney.setmInputType(4)
+//                edtMoney.setmInputType(4)
+
+                startActivityExt<IntentActivity>(activityLauncher) { result ->
+                    Log.e("result", "${result.resultCode}")
+                }
 
 //                val builder = CFAlertDialog.Builder(this@MainActivity)
 //                    .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
@@ -128,9 +129,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 ////            val intent = Intent(this,IntentActivity::class.java)
 ////            mStartForResult.launch(intent)
 //
-////            startActivityExt<IntentActivity>(activityLauncher) { result ->
-////                Log.e("result", "${result.resultCode}")
-////            }
+
 //
 //
 ////            startActivityExt<IntentActivity> { result ->
