@@ -59,6 +59,7 @@ class NSEdittext : LinearLayout {
     private var imeOptionsListener: EdittextImeOptionsListener? = null
     private var maxMoney = 0L
     private var msgMaxMoney = ""
+    var mErrorIsShow = false
 
 
     constructor(context: Context?) : super(context)
@@ -444,6 +445,8 @@ class NSEdittext : LinearLayout {
         val mStyle = typedArray.getInt(R.styleable.NSEdittext_errorTextStyle, 0)
         moneyFormatCharacter = typedArray.getInt(R.styleable.NSEdittext_moneyFormatCharacter, 0)
 
+        mErrorIsShow =
+            typedArray.getBoolean(R.styleable.NSEdittext_errorIsShow, true)
         var mPaddingStart =
             typedArray.getDimensionPixelSize(R.styleable.NSEdittext_errorPaddingStart, 0)
                 .toFloat()
@@ -530,7 +533,7 @@ class NSEdittext : LinearLayout {
     @SuppressLint("SetTextI18n")
     private fun showError(isShow: Boolean) {
         Log.e("showError", " $isShow")
-        if (isShow) {
+        if (isShow && mErrorIsShow) {
             var hintEdt = ""
             editText?.let {
                 if (it.hint != null)

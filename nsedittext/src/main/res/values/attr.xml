@@ -22,6 +22,7 @@
         <attr name="android:paddingStart" />
         <attr name="android:paddingEnd" />
         <attr name="android:paddingVertical" />
+        <attr name="android:visibility" />
         <attr name="android:paddingHorizontal" />
 
         <attr name="inputType">
@@ -69,6 +70,7 @@
         <attr name="errorText" format="string" />
         <attr name="errorTextColor" format="reference|color" />
         <attr name="errorTextSize" format="dimension" />
+        <attr name="errorIsShow" format="boolean" />
         <attr name="errorTextStyle">
             <flag name="normal" value="0" />
             <flag name="bold" value="1" />
