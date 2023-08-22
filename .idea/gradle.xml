@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/nsextension" />
             <option value="$PROJECT_DIR$/nslog" />
             <option value="$PROJECT_DIR$/permission" />
+            <option value="$PROJECT_DIR$/powerspinner" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

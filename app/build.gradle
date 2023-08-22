@@ -45,6 +45,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation project(':nsbaseadapter')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -52,6 +53,7 @@ dependencies {
     implementation project(path: ':nsedittext')
     implementation project(path: ':nsdialog')
     implementation project(path: ':nsextension')
+    implementation project(path: ':powerspinner')
 //
 //    // Get Image/Video
 //    implementation 'io.github.ParkSangGwon:tedimagepicker:1.2.8'

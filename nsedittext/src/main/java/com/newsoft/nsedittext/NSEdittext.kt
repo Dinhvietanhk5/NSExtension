@@ -532,7 +532,7 @@ class NSEdittext : LinearLayout {
      */
     @SuppressLint("SetTextI18n")
     private fun showError(isShow: Boolean) {
-        Log.e("showError", " $isShow")
+//        Log.e("showError", " $isShow")
         if (isShow && mErrorIsShow) {
             var hintEdt = ""
             editText?.let {

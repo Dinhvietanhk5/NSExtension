@@ -155,7 +155,8 @@ abstract class BaseAdapter<T, VH : RecyclerView.ViewHolder>() :
     override fun onBindViewHolder(holder: VH, position: Int) {
         try {
             viewHolder = holder
-            if (items.size > 0) onBindView(holder, items[position], position, realCount())
+            if (items.size > 0)
+                onBindView(holder, items[position], position, realCount())
             else if (countTest != 0)
                 onBindView(holder, null, position, realCount())
 

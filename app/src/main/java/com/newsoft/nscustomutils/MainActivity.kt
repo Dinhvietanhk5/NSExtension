@@ -8,10 +8,13 @@ import android.view.MotionEvent
 import android.view.View.OnTouchListener
 import android.widget.EditText
 import androidx.activity.result.ActivityResult
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.newsoft.nscustomutils.databinding.ActivityMainBinding
 import com.newsoft.nsextension.ext.context.getCompatColor
 import com.newsoft.nsextension.ext.context.launcher_result.BetterActivityResult
 import com.newsoft.nsextension.ext.context.startActivityExt
+import com.newsoft.spinner.IconSpinnerAdapter
+import com.newsoft.spinner.IconSpinnerItem
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
@@ -25,22 +28,58 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     @SuppressLint("ClickableViewAccessibility", "WrongThread")
     override fun onCreate() {
         binding.apply {
-            btnNext.setOnClickListener {
-//                edtMoney.setmInputType(4)
+//            btnNext.setOnClickListener {
+////                edtMoney.setmInputType(4)
+//
+//                startActivityExt<IntentActivity>(activityLauncher) { result ->
+//                    Log.e("result", "${result.resultCode}")
+//                }
+//
+////                val builder = CFAlertDialog.Builder(this@MainActivity)
+////                    .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+////                    .setTitle("notification")
+////                    .setTextColor(getCompatColor(com.newsoft.nsedittext.R.color.red))
+////                    .setDialogBackgroundColor(getCompatColor(R.color.black))
+////                    .setTextGravity(Gravity.CENTER)
+////                    .setMessage("msg")
+////                val dialog = builder.show()
+//            }
 
-                startActivityExt<IntentActivity>(activityLauncher) { result ->
-                    Log.e("result", "${result.resultCode}")
+            val items = arrayOf("1","2","3")
+            val spinnerItems = ArrayList<IconSpinnerItem>()
+            for (item in  items!!) {
+                spinnerItems.add(
+                    IconSpinnerItem(
+                        text = item,
+                        tag = item
+                    )
+                )
+            }
+                spinnerViewCity.apply {
+                    setSpinnerAdapter(IconSpinnerAdapter(this))
+                    setItems(spinnerItems)
+                    getSpinnerRecyclerView().layoutManager =
+                        LinearLayoutManager(this@MainActivity)
+                    setOnSpinnerItemSelectedListener<IconSpinnerItem> { _, _, _, item ->
+//                    val itemCity = item.tag as CityModel.Item
+//                    city_id = itemCity.id
+//                    iniSpinnerDistrict(itemCity.id)
+                        Log.e("IconSpinnerItem", "${item.tag}")
+                    }
+                    lifecycleOwner = this@MainActivity
                 }
 
-//                val builder = CFAlertDialog.Builder(this@MainActivity)
-//                    .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
-//                    .setTitle("notification")
-//                    .setTextColor(getCompatColor(com.newsoft.nsedittext.R.color.red))
-//                    .setDialogBackgroundColor(getCompatColor(R.color.black))
-//                    .setTextGravity(Gravity.CENTER)
-//                    .setMessage("msg")
-//                val dialog = builder.show()
-            }
+
+//            val adapter = TestAdapter()
+//            adapter.apply {
+//                setRecyclerView(rvList, countTest = 200)
+//                setOnAdapterListener { id, item, pos ->
+//                    Log.e("setOnAdapterListener", " ")
+//                }
+////                setLoadData {
+////                    Log.e("setLoadData", " ")
+////                }
+//            }
         }
 
 //        checkHideKeyboardOnTouchScreen(packed)
@@ -83,16 +122,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 //        Log.e("formatStringNumBer","${formatStringNumBer(10000L ,".")}")
 //
 //
-//        val adapter = TestAdapter()
-//        adapter.apply {
-//            setRecyclerView(rvList, countTest = 200)
-//            setOnAdapterListener { id, item, pos ->
-//                Log.e("setOnAdapterListener", " ")
-//            }
-//            setLoadData {
-//                Log.e("setLoadData", " ")
-//            }
-//        }
+
 //        edtMoney.setMaxMoney(100000000000,"Tiền bị giới hạn")
 //
 
