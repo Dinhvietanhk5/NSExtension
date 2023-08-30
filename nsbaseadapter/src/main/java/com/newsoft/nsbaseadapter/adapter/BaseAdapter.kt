@@ -200,7 +200,7 @@ abstract class BaseAdapter<T, VH : RecyclerView.ViewHolder>() :
      */
     fun setCountItemTest(countTest: Int) {
         this.countTest = countTest
-        Log.e("setCountItemTest"," $countTest")
+//        Log.e("setCountItemTest"," $countTest")
         if (countTest != 0) {
             viewEmpty?.let { it.visibility = View.GONE }
             recyclerView?.let { it.visibility = View.VISIBLE }
