@@ -54,7 +54,7 @@ abstract class BaseAdapter<T, VH : RecyclerView.ViewHolder>() :
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItems(items: List<T>?, index: Int) {
+    fun setItems(items: List<T>?, index: Int = 0) {
         try {
             setItems(items as ArrayList<T>, index)
         } catch (e: Exception) {
