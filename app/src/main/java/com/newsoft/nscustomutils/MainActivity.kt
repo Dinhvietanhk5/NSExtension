@@ -10,9 +10,7 @@ import android.widget.EditText
 import androidx.activity.result.ActivityResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.newsoft.nscustomutils.databinding.ActivityMainBinding
-import com.newsoft.nsextension.ext.context.getCompatColor
 import com.newsoft.nsextension.ext.context.launcher_result.BetterActivityResult
-import com.newsoft.nsextension.ext.context.startActivityExt
 import com.newsoft.spinner.IconSpinnerAdapter
 import com.newsoft.spinner.IconSpinnerItem
 
@@ -27,6 +25,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     @SuppressLint("ClickableViewAccessibility", "WrongThread")
     override fun onCreate() {
+
+//handlePermission()
+
+//        val dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(44100,5000,2500)
+//        val dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050, 1024, 0)
+
         binding.apply {
 //            btnNext.setOnClickListener {
 ////                edtMoney.setmInputType(4)
@@ -45,42 +49,48 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 ////                val dialog = builder.show()
 //            }
 
-            val items = arrayOf("1","2","3")
-            val spinnerItems = ArrayList<IconSpinnerItem>()
-            for (item in  items!!) {
-                spinnerItems.add(
-                    IconSpinnerItem(
-                        text = item,
-                        tag = item
-                    )
-                )
-            }
-                spinnerViewCity.apply {
-                    setSpinnerAdapter(IconSpinnerAdapter(this))
-                    setItems(spinnerItems)
-                    getSpinnerRecyclerView().layoutManager =
-                        LinearLayoutManager(this@MainActivity)
-                    setOnSpinnerItemSelectedListener<IconSpinnerItem> { _, _, _, item ->
-//                    val itemCity = item.tag as CityModel.Item
-//                    city_id = itemCity.id
-//                    iniSpinnerDistrict(itemCity.id)
-                        Log.e("IconSpinnerItem", "${item.tag}")
-                    }
-                    lifecycleOwner = this@MainActivity
-                }
-
-
-//            val adapter = TestAdapter()
-//            adapter.apply {
-//                setRecyclerView(rvList, countTest = 200)
-//                setOnAdapterListener { id, item, pos ->
-//                    Log.e("setOnAdapterListener", " ")
-//                }
-////                setLoadData {
-////                    Log.e("setLoadData", " ")
-////                }
+//            val items = arrayOf("1","2","3")
+//            val spinnerItems = ArrayList<IconSpinnerItem>()
+//            for (item in  items!!) {
+//                spinnerItems.add(
+//                    IconSpinnerItem(
+//                        text = item,
+//                        tag = item
+//                    )
+//                )
 //            }
+//                spinnerViewCity.apply {
+//                    setSpinnerAdapter(IconSpinnerAdapter(this))
+//                    setItems(spinnerItems)
+//                    getSpinnerRecyclerView().layoutManager =
+//                        LinearLayoutManager(this@MainActivity)
+//                    setOnSpinnerItemSelectedListener<IconSpinnerItem> { _, _, _, item ->
+////                    val itemCity = item.tag as CityModel.Item
+////                    city_id = itemCity.id
+////                    iniSpinnerDistrict(itemCity.id)
+//                        Log.e("IconSpinnerItem", "${item.tag}")
+//                    }
+//                    lifecycleOwner = this@MainActivity
+//                }
+
+            val array = arrayListOf<String>()
+
+            for (i in 1..10)
+                array.add("$i")
+
+            val adapter = TestAdapter()
+            adapter.apply {
+                setRecyclerView(rvList, viewEmpty = noteText)
+                setOnAdapterListener { id, item, pos ->
+                    Log.e("setOnAdapterListener", " ")
+                }
+                setItems(array)
+//                setLoadData {
+//                    Log.e("setLoadData", " ")
+//                }
+            }
         }
+
 
 //        checkHideKeyboardOnTouchScreen(packed)
 //        switchFragment(newInstance<MainFragment>("type" to TypeConnectEnums.NEW_INVITE))
@@ -246,7 +256,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 //        })
 
     }
-
 
     fun Context.onPermissionExplanation(
         onChangeToWays: (() -> Unit),

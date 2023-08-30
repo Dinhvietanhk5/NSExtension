@@ -8,7 +8,7 @@ import com.newsoft.nsbaseadapter.adapter.BaseAdapter
 import com.newsoft.nscustomutils.databinding.ItemViewEmptyBinding
 
 class TestAdapter :
-    BaseAdapter<String?, TestAdapter.ViewHolder>() {
+    BaseAdapter<String, TestAdapter.ViewHolder>() {
 
 
     inner class ViewHolder(view: ItemViewEmptyBinding) : RecyclerView.ViewHolder(view.root) {

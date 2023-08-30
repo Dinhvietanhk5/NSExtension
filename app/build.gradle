@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -54,6 +55,11 @@ dependencies {
     implementation project(path: ':nsdialog')
     implementation project(path: ':nsextension')
     implementation project(path: ':powerspinner')
+    implementation project(path: ':permission')
+
+
+//    implementation 'be.tarsos.dsp:core:2.5'
+//    implementation 'be.tarsos.dsp:jvm:2.5'
 //
 //    // Get Image/Video
 //    implementation 'io.github.ParkSangGwon:tedimagepicker:1.2.8'

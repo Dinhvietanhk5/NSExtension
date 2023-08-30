@@ -2,6 +2,7 @@ package com.newsoft.nsbaseadapter.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,7 +68,7 @@ abstract class BaseAdapter<T, VH : RecyclerView.ViewHolder>() :
      *  index != 0 -> addItem
      */
     @SuppressLint("NotifyDataSetChanged")
-    fun setItems(items: ArrayList<T>?, index: Int) {
+    fun setItems(items: ArrayList<T>?, index: Int = 0) {
         try {
             recyclerViewEventLoad?.let {
                 it.index = index
@@ -199,6 +200,7 @@ abstract class BaseAdapter<T, VH : RecyclerView.ViewHolder>() :
      */
     fun setCountItemTest(countTest: Int) {
         this.countTest = countTest
+        Log.e("setCountItemTest"," $countTest")
         if (countTest != 0) {
             viewEmpty?.let { it.visibility = View.GONE }
             recyclerView?.let { it.visibility = View.VISIBLE }
@@ -232,6 +234,7 @@ abstract class BaseAdapter<T, VH : RecyclerView.ViewHolder>() :
         recyclerView: RecyclerView,
         viewEmpty: View? = null,
         type: RvLayoutManagerEnums = RvLayoutManagerEnums.LinearLayout_VERTICAL,
+        isTestView: Boolean = false,
         countTest: Int = 0
     ) {
         var layout: RecyclerView.LayoutManager = LinearLayoutManager(context)
@@ -242,11 +245,13 @@ abstract class BaseAdapter<T, VH : RecyclerView.ViewHolder>() :
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
+
             RvLayoutManagerEnums.LinearLayout_INVALID_OFFSET -> LinearLayoutManager(
                 context,
                 LinearLayoutManager.INVALID_OFFSET,
                 false
             )
+
             RvLayoutManagerEnums.GridLayoutManager_spanCount1 -> GridLayoutManager(context, 1)
             RvLayoutManagerEnums.GridLayoutManager_spanCount2 -> GridLayoutManager(context, 2)
             RvLayoutManagerEnums.GridLayoutManager_spanCount3 -> GridLayoutManager(context, 3)
@@ -255,22 +260,26 @@ abstract class BaseAdapter<T, VH : RecyclerView.ViewHolder>() :
                 LinearLayout.VERTICAL
             )
         }
-        setRecyclerView(recyclerView, viewEmpty, layout, countTest)
+        setRecyclerView(recyclerView, viewEmpty, layout, isTestView, countTest)
     }
 
     fun setRecyclerView(
         recyclerView: RecyclerView,
         viewEmpty: View? = null,
         layoutManager: RecyclerView.LayoutManager,
+        isTestView: Boolean = false,
         countTest: Int = 0
     ) {
-        viewEmpty?.let {
-            this.viewEmpty = it
-        }
-        setCountItemTest(countTest)
         this.recyclerView = recyclerView
         this.recyclerView!!.adapter = this
         this.recyclerView!!.layoutManager = layoutManager
+
+
+        viewEmpty?.let {
+            this.viewEmpty = it
+        }
+        if (isTestView || countTest > 0)
+            setCountItemTest(countTest)
     }
 
 
@@ -303,6 +312,7 @@ abstract class BaseAdapter<T, VH : RecyclerView.ViewHolder>() :
     fun setRecyclerView(
         nsRecyclerView: NSRecyclerview,
         type: RvLayoutManagerEnums = RvLayoutManagerEnums.LinearLayout_VERTICAL,
+        isTestView: Boolean = false,
         countTest: Int = 0
     ) {
         recyclerView = nsRecyclerView.recyclerView
@@ -316,11 +326,13 @@ abstract class BaseAdapter<T, VH : RecyclerView.ViewHolder>() :
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
+
             RvLayoutManagerEnums.LinearLayout_INVALID_OFFSET -> LinearLayoutManager(
                 context,
                 LinearLayoutManager.INVALID_OFFSET,
                 false
             )
+
             RvLayoutManagerEnums.GridLayoutManager_spanCount1 -> GridLayoutManager(context, 1)
             RvLayoutManagerEnums.GridLayoutManager_spanCount2 -> GridLayoutManager(context, 2)
             RvLayoutManagerEnums.GridLayoutManager_spanCount3 -> GridLayoutManager(context, 3)
@@ -330,26 +342,28 @@ abstract class BaseAdapter<T, VH : RecyclerView.ViewHolder>() :
             )
         }
 
-        setRecyclerView(nsRecyclerView, layout, countTest)
+        setRecyclerView(nsRecyclerView, layout, isTestView, countTest)
     }
 
     fun setRecyclerView(
         nsRecyclerView: NSRecyclerview,
         layoutManager: RecyclerView.LayoutManager,
-        countTest: Int? = 0
+        isTestView: Boolean = false,
+        countTest: Int = 0
     ) {
         viewEmpty = nsRecyclerView.viewEmpty
         swRefresh = nsRecyclerView.swRefresh
         recyclerView = nsRecyclerView.recyclerView
 
+        this.recyclerView = nsRecyclerView.recyclerView
+        this.recyclerView!!.adapter = this
+        this.recyclerView!!.layoutManager = layoutManager
 
         viewEmpty?.let {
             this.viewEmpty = it
         }
-        setCountItemTest(countTest!!)
-        this.recyclerView = nsRecyclerView.recyclerView
-        this.recyclerView!!.adapter = this
-        this.recyclerView!!.layoutManager = layoutManager
+        if (isTestView || countTest > 0)
+            setCountItemTest(countTest)
     }
 
     /**
