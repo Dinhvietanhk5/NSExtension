@@ -31,70 +31,67 @@
     <!--    &lt;!&ndash;    <com.newsoft.nsdatepicker.NsDateView&ndash;&gt;-->
     <!--    &lt;!&ndash;        android:layout_width="wrap_content"&ndash;&gt;-->
     <!--    &lt;!&ndash;        android:layout_height="wrap_content" />&ndash;&gt;-->
-    <TextView
-        android:id="@+id/pitchText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="1"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/noteText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="1"
-        android:visibility="gone" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvList"
-        android:layout_width="match_parent"
-        android:background="@color/black"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
-
-    <com.newsoft.spinner.PowerSpinnerView
-        android:id="@+id/spinnerViewCity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:hint="Chọn Tỉnh/Thành phố"
-        android:paddingVertical="12dp"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:spinner_arrow_show="true"
-        app:spinner_item_height="46dp"
-        app:spinner_popup_animation="dropdown"
-        app:spinner_popup_background="@color/white"
-        app:spinner_popup_elevation="14dp"
-        app:spinner_popup_max_height="400dp" />
-
-    <!--    <com.newsoft.nsedittext.NSEdittext-->
-    <!--        android:id="@+id/edtMoney"-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/pitchText"-->
     <!--        android:layout_width="match_parent"-->
     <!--        android:layout_height="wrap_content"-->
-    <!--        android:fontFamily="@font/robotomedium"-->
-    <!--        android:hint="pass"-->
-    <!--        android:paddingHorizontal="10dp"-->
-    <!--        android:paddingVertical="12dp"-->
-    <!--        android:drawablePadding="10dp"-->
-    <!--        android:drawableStart="@drawable/ic_cancel"-->
-    <!--        android:textColor="@color/black"-->
-    <!--        android:textColorHint="@color/black"-->
-    <!--        android:textSize="20sp"-->
-    <!--        app:drawableIconPassInvisible="@drawable/ic_cancel"-->
-    <!--        app:inputType="pass" />-->
-
+    <!--        android:gravity="center"-->
+    <!--        android:text="1"-->
+    <!--        android:visibility="gone" />-->
 
     <!--    <TextView-->
-    <!--        android:id="@+id/btnNext"-->
+    <!--        android:id="@+id/noteText"-->
     <!--        android:layout_width="match_parent"-->
     <!--        android:layout_height="wrap_content"-->
-    <!--        android:background="@color/colorPrimary"-->
     <!--        android:gravity="center"-->
+    <!--        android:text="1"-->
+    <!--        android:visibility="gone" />-->
+
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:id="@+id/rvList"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:background="@color/black"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_weight="1" />-->
+
+    <!--    <com.newsoft.spinner.PowerSpinnerView-->
+    <!--        android:id="@+id/spinnerViewCity"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:gravity="center"-->
+    <!--        android:hint="Chọn Tỉnh/Thành phố"-->
     <!--        android:paddingVertical="12dp"-->
-    <!--        android:text="next" />-->
+    <!--        android:textSize="12sp"-->
+    <!--        android:visibility="gone"-->
+    <!--        app:spinner_arrow_show="true"-->
+    <!--        app:spinner_item_height="46dp"-->
+    <!--        app:spinner_popup_animation="dropdown"-->
+    <!--        app:spinner_popup_background="@color/white"-->
+    <!--        app:spinner_popup_elevation="14dp"-->
+    <!--        app:spinner_popup_max_height="400dp" />-->
+
+    <com.newsoft.nsedittext.NSEdittext
+        android:id="@+id/edtMoney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_cancel"
+        android:drawablePadding="10dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="12dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:inputType="email" />
+
+    <TextView
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:paddingVertical="12dp"
+        android:text="next" />
 
     <!--    <ImageView-->
     <!--        android:id="@+id/image"-->

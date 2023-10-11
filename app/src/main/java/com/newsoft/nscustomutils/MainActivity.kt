@@ -20,8 +20,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 //    protected val activityLauncher: BetterActivityResult<Intent, ActivityResult> =
 //        BetterActivityResult.r
 
-    protected val activityLauncher: BetterActivityResult<Intent, ActivityResult> =
-        BetterActivityResult.registerActivityForResult(this)
+//    protected val activityLauncher: BetterActivityResult<Intent, ActivityResult> =
+//        BetterActivityResult.registerActivityForResult(this)
 
     @SuppressLint("ClickableViewAccessibility", "WrongThread")
     override fun onCreate() {
@@ -32,7 +32,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 //        val dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050, 1024, 0)
 
         binding.apply {
-//            btnNext.setOnClickListener {
+
+            btnNext.setOnClickListener {
+                Log.e("edtMoney", "${edtMoney.validate()}")
+            }
 ////                edtMoney.setmInputType(4)
 //
 //                startActivityExt<IntentActivity>(activityLauncher) { result ->
@@ -73,22 +76,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 //                    lifecycleOwner = this@MainActivity
 //                }
 
-            val array = arrayListOf<String>()
-
-            for (i in 1..10)
-                array.add("$i")
-
-            val adapter = TestAdapter()
-            adapter.apply {
-                setRecyclerView(rvList, viewEmpty = noteText)
-                setOnAdapterListener { id, item, pos ->
-                    Log.e("setOnAdapterListener", " ")
-                }
-                setItems(array)
-//                setLoadData {
-//                    Log.e("setLoadData", " ")
+//            val array = arrayListOf<String>()
+//
+//            for (i in 1..10)
+//                array.add("$i")
+//
+//            val adapter = TestAdapter()
+//            adapter.apply {
+//                setRecyclerView(rvList, viewEmpty = noteText)
+//                setOnAdapterListener { id, item, pos ->
+//                    Log.e("setOnAdapterListener", " ")
 //                }
-            }
+//                setItems(array)
+////                setLoadData {
+////                    Log.e("setLoadData", " ")
+////                }
+//            }
         }
 
 

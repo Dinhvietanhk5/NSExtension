@@ -208,10 +208,10 @@ class NSEdittext : LinearLayout {
             } else
                 typeface = Typeface.defaultFromStyle(mEdtStyle)
 
-            setFontTextHint(mHint!!)
+            if (mHint != null)
+                setFontTextHint(mHint)
 
             gravity = mGravity
-
 
             if (mEdtColorHint != -1) setHintTextColor(
                 ContextCompat.getColor(
@@ -377,15 +377,17 @@ class NSEdittext : LinearLayout {
     }
 
     private fun EditText.setFontTextHint(mHint: String) {
-        val typefaceSpan: TypefaceSpan = CustomTypefaceSpan(typeface)
-        val spannableString = SpannableString(mHint)
-        spannableString.setSpan(
-            typefaceSpan,
-            0,
-            spannableString.length,
-            Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-        )
-        hint = spannableString
+        if (typeface != null) {
+            val typefaceSpan: TypefaceSpan = CustomTypefaceSpan(typeface)
+            val spannableString = SpannableString(mHint)
+            spannableString.setSpan(
+                typefaceSpan,
+                0,
+                spannableString.length,
+                Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+            )
+            hint = spannableString
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -435,7 +437,9 @@ class NSEdittext : LinearLayout {
         typedArray: TypedArray,
         context: Context
     ) {
-        val mText = typedArray.getString(R.styleable.NSEdittext_errorText)
+        typedArray.getString(R.styleable.NSEdittext_errorText)?.let {
+            msgError = it
+        }
         val mColor = typedArray.getColor(
             R.styleable.NSEdittext_errorTextColor,
             ContextCompat.getColor(context, R.color.red)
@@ -468,7 +472,7 @@ class NSEdittext : LinearLayout {
         }
 
         tvError?.apply {
-            if (mText != null) text = mText
+            if (msgError.isEmpty()) text = msgError
 
             setTextColor(mColor)
 
@@ -574,8 +578,10 @@ class NSEdittext : LinearLayout {
                     Utility.isRegexpValidator(editText, customRegexp)
 
                 Constant.TEXT_CREDITCARD -> isValidate = Utility.isCreditCardValidator(editText)
-                Constant.TEXT_EMAIL -> isValidate = validateTor.isEmail(text)
-                Constant.TEXT_PHONE -> isValidate = Utility.isPhone(editText) && text!!.length > 8
+                Constant.TEXT_EMAIL -> isValidate = validateTor.isValidEmailId(text)
+                Constant.TEXT_PHONE -> isValidate =
+                    Utility.isPhone(editText) && text!!.length in 9..12
+
                 Constant.TEXT_DOMAINNAME -> isValidate = validateTor.isDecimal(text)
                 Constant.TEXT_IPADDRESS -> isValidate = validateTor.isIPAddress(text)
                 Constant.TEXT_PERSONNAME -> isValidate = Utility.isPersonNameValidator(editText)
