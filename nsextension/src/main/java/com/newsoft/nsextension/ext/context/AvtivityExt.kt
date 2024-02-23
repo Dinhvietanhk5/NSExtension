@@ -154,7 +154,7 @@ fun AppCompatActivity.switchFragmentBackStack(
  *  New Fragment In Activity
  */
 
-fun AppCompatActivity.switchFragment(container: Int, fragment: Fragment, tagFragment: String) {
+fun AppCompatActivity.switchFragment(container: Int, fragment: Fragment, tagFragment: String = "") {
     val tag = tagFragment.ifEmpty { fragment.javaClass.simpleName }
     val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -181,7 +181,11 @@ fun AppCompatActivity.switchFragment(container: Int, fragment: Fragment, tagFrag
  *  New Fragment In Activity
  */
 
-fun AppCompatActivity.switchFragment(container: ViewGroup, fragment: Fragment, tagFragment: String) {
+fun AppCompatActivity.switchFragment(
+    container: ViewGroup,
+    fragment: Fragment,
+    tagFragment: String = "",
+) {
     val tag = tagFragment.ifEmpty { fragment.javaClass.simpleName }
     val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
