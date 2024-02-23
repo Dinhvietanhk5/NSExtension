@@ -30,12 +30,13 @@ inline fun <reified T : Fragment> newInstance(vararg params: Pair<String, Any>):
 inline fun <reified T : Fragment> Fragment.switchFragmentBackStackUpDown(
     container: Int,
     isBackTask: Boolean,
-    vararg params: Pair<String, Any>
+    vararg params: Pair<String, Any>,
+    tag: String = "",
 ) {
     val fragment = T::class.java.newInstance().apply {
         arguments = bundleOf(*params)
     }
-    (requireActivity() as AppCompatActivity).switchFragment(container, fragment, isBackTask)
+    (requireActivity() as AppCompatActivity).switchFragment(container, fragment, isBackTask, tag)
 }
 
 /**
@@ -44,7 +45,7 @@ inline fun <reified T : Fragment> Fragment.switchFragmentBackStackUpDown(
 
 inline fun <reified T : Fragment> Fragment.switchFragmentBackStack(
     container: Int,
-    vararg params: Pair<String, Any>
+    vararg params: Pair<String, Any>,
 ) {
     val fragment = T::class.java.newInstance().apply {
         arguments = bundleOf(*params)
@@ -58,7 +59,7 @@ inline fun <reified T : Fragment> Fragment.switchFragmentBackStack(
 
 inline fun <reified T : Fragment> Fragment.switchFragmentNotBackStack(
     container: Int,
-    vararg params: Pair<String, Any>
+    vararg params: Pair<String, Any>,
 ) {
     val fragment = T::class.java.newInstance().apply {
         arguments = bundleOf(*params)
@@ -73,7 +74,7 @@ inline fun <reified T : Fragment> Fragment.switchFragmentNotBackStack(
 
 fun Fragment.switchFragmentNotBackStack(
     container: Int,
-    fragment: Fragment?
+    fragment: Fragment?,
 ) {
     (requireActivity() as AppCompatActivity).switchFragmentNotBackStack(container, fragment)
 }
@@ -84,7 +85,7 @@ fun Fragment.switchFragmentNotBackStack(
 
 fun Fragment.switchFragmentBackStack(
     container: Int,
-    fragment: Fragment?
+    fragment: Fragment?,
 ) {
     (requireActivity() as AppCompatActivity).switchFragmentBackStack(container, fragment)
 }
@@ -106,7 +107,7 @@ fun Fragment.backStack() {
 inline fun <reified T : Activity> Fragment.startActivityExtFinish(
     requestCode: Int = -1,
     options: Bundle? = null,
-    vararg params: Pair<String, Any>
+    vararg params: Pair<String, Any>,
 ) {
     val activity = (requireActivity() as AppCompatActivity)
     val intent = Intent(activity, T::class.java)
@@ -116,7 +117,7 @@ inline fun <reified T : Activity> Fragment.startActivityExtFinish(
 }
 
 inline fun <reified T : Activity> Fragment.startActivityExtFinish(
-    vararg params: Pair<String, Any>
+    vararg params: Pair<String, Any>,
 ) {
     val activity = (requireActivity() as AppCompatActivity)
     val intent = Intent(activity, T::class.java)
@@ -126,7 +127,7 @@ inline fun <reified T : Activity> Fragment.startActivityExtFinish(
 }
 
 inline fun <reified T : Activity> Fragment.startActivityExt(
-    vararg params: Pair<String, Any>
+    vararg params: Pair<String, Any>,
 ) {
     val activity = (requireActivity() as AppCompatActivity)
     val intent = Intent(activity, T::class.java)
@@ -137,7 +138,7 @@ inline fun <reified T : Activity> Fragment.startActivityExt(
 inline fun <reified T : Activity> Fragment.startActivityExt(
     activityLauncher: BetterActivityResult<Intent, ActivityResult>,
     vararg paramsFragment: Pair<String, Any>,
-    crossinline onActivityResult: (ActivityResult) -> Unit
+    crossinline onActivityResult: (ActivityResult) -> Unit,
 ) {
     val activity = (requireActivity() as AppCompatActivity)
     activity.startActivityExt<T>(activityLauncher, params = paramsFragment, onActivityResult)
@@ -146,7 +147,7 @@ inline fun <reified T : Activity> Fragment.startActivityExt(
 inline fun <reified T : Activity> Fragment.startActivityExtFinish(
     activityLauncher: BetterActivityResult<Intent, ActivityResult>,
     vararg paramsFragment: Pair<String, Any>,
-    crossinline onActivityResult: (ActivityResult) -> Unit
+    crossinline onActivityResult: (ActivityResult) -> Unit,
 ) {
     val activity = (requireActivity() as AppCompatActivity)
     activity.startActivityExt<T>(activityLauncher, params = paramsFragment, onActivityResult)

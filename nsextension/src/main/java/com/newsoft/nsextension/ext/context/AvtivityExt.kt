@@ -61,7 +61,7 @@ inline fun <reified T : Activity> Activity.startActivityExt(
 inline fun <reified T : Activity> Activity.startActivityExt(
     activityLauncher: BetterActivityResult<Intent, ActivityResult>,
     vararg params: Pair<String, Any>,
-    crossinline onActivityResult: (ActivityResult) -> Unit
+    crossinline onActivityResult: (ActivityResult) -> Unit,
 ) {
     val intent = Intent(this, T::class.java)
     intent.putDataExtras(*params)
@@ -87,7 +87,7 @@ inline fun <reified T : Activity> View.startActivityExt(
 fun AppCompatActivity.switchFragmentUpDown(
     container: Int,
     fragment: Fragment?,
-    isBackTask: Boolean
+    isBackTask: Boolean,
 ) {
     val tag = fragment!!.javaClass.simpleName
     hideSoftKeyboard()
@@ -111,9 +111,9 @@ fun AppCompatActivity.switchFragmentUpDown(
 fun AppCompatActivity.switchFragment(
     container: Int,
     fragment: Fragment?,
-    isBackTask: Boolean
+    isBackTask: Boolean,
+    tag: String,
 ) {
-    val tag = fragment!!.javaClass.simpleName
     hideSoftKeyboard()
     val fragmentTransaction =
         supportFragmentManager
@@ -121,7 +121,7 @@ fun AppCompatActivity.switchFragment(
                 R.animator.slide_in_left, R.animator.slide_out_left,
                 R.animator.slide_out_right, R.animator.slide_in_right
             )
-            .replace(container, fragment, tag)
+            .replace(container, fragment!!, tag.ifEmpty { fragment.javaClass.simpleName })
     if (isBackTask) fragmentTransaction.addToBackStack(tag)
     fragmentTransaction.commit()
 }
@@ -132,9 +132,10 @@ fun AppCompatActivity.switchFragment(
 
 fun AppCompatActivity.switchFragmentNotBackStack(
     container: Int,
-    fragment: Fragment?
+    fragment: Fragment?,
+    tag: String = "",
 ) {
-    switchFragment(container, fragment, false)
+    switchFragment(container, fragment, false, tag)
 }
 
 /**
@@ -143,9 +144,10 @@ fun AppCompatActivity.switchFragmentNotBackStack(
 
 fun AppCompatActivity.switchFragmentBackStack(
     container: Int,
-    fragment: Fragment?
+    fragment: Fragment?,
+    tag: String = "",
 ) {
-    switchFragment(container, fragment, true)
+    switchFragment(container, fragment, true,tag)
 }
 
 /**
@@ -207,7 +209,7 @@ fun AppCompatActivity.switchFragment(container: ViewGroup, fragment: Fragment) {
 
 fun Activity.finishActivityForResultExt(
     vararg params: Pair<String, Any>,
-    requestCode: Int = RESULT_OK
+    requestCode: Int = RESULT_OK,
 ) {
     val intent = Intent()
     intent.putDataExtras(*params)
@@ -257,13 +259,17 @@ fun Intent.putDataExtras(vararg params: Pair<String, Any>): Intent {
                 when {
                     value.isArrayOf<String>() ->
                         putExtra(key, value as Array<String?>)
+
                     value.isArrayOf<Parcelable>() ->
                         putExtra(key, value as Array<Parcelable?>)
+
                     value.isArrayOf<CharSequence>() ->
                         putExtra(key, value as Array<CharSequence?>)
+
                     else -> putExtra(key, value)
                 }
             }
+
             is Serializable -> putExtra(key, value)
         }
     }

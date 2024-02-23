@@ -1,5 +1,6 @@
 package com.newsoft.nscustomutils
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -9,8 +10,10 @@ import android.view.View.OnTouchListener
 import android.widget.EditText
 import androidx.activity.result.ActivityResult
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.newsoft.handlePermission
 import com.newsoft.nscustomutils.databinding.ActivityMainBinding
 import com.newsoft.nsextension.ext.context.launcher_result.BetterActivityResult
+import com.newsoft.nsextension.ext.context.switchFragment
 import com.newsoft.spinner.IconSpinnerAdapter
 import com.newsoft.spinner.IconSpinnerItem
 
@@ -30,6 +33,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
 //        val dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(44100,5000,2500)
 //        val dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050, 1024, 0)
+//        switchFragment()
+        val array = arrayOf(Manifest.permission.SEND_SMS)
+        handlePermission(Manifest.permission.SEND_SMS, onAccepted = {
+
+        }, onDenied = {
+
+        })
 
         binding.apply {
 

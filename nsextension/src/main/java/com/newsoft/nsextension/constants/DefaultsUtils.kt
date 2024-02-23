@@ -12,6 +12,5 @@ interface DefaultsUtils {
         const val DATE_TIME_FORMAT_COMPLETE = "EEE, MMM d, yyyy • h:mm a"
         const val TIME_FORMAT_12 = "h:mm a"
         const val DATE_TIME_SERVER_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX"
-
     }
 }
