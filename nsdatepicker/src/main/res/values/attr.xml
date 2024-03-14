@@ -15,6 +15,7 @@
         <attr name="defaultDate" format="boolean" />
         // ngăn không cho xem ngày quá khứ
         <attr name="isPast" format="boolean" />
+        <attr name="isFuture" format="boolean" />
         <attr name="start7Day" format="boolean" />
     </declare-styleable>
 

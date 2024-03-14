@@ -56,6 +56,7 @@ dependencies {
     implementation project(path: ':nsextension')
     implementation project(path: ':powerspinner')
     implementation project(path: ':permission')
+    implementation project(path: ':nsdatepicker')
 
 
 //    implementation 'be.tarsos.dsp:core:2.5'

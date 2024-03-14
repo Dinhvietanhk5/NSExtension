@@ -43,9 +43,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
         binding.apply {
 
-            btnNext.setOnClickListener {
-                Log.e("edtMoney", "${edtMoney.validate()}")
-            }
+//            btnNext.setOnClickListener {
+//                Log.e("edtMoney", "${edtMoney.validate()}")
+//            }
 ////                edtMoney.setmInputType(4)
 //
 //                startActivityExt<IntentActivity>(activityLauncher) { result ->

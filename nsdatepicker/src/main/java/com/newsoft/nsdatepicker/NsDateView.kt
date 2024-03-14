@@ -112,7 +112,7 @@ class NsDateView : TextView {
         if (type == 1) monthPicker.visibility = GONE
 
         val year: Int = calendar!!.get(Calendar.YEAR)
-        yearPicker.minValue = year
+        yearPicker.minValue = 1000
         yearPicker.maxValue = 2999
         yearPicker.value = year
 
@@ -134,9 +134,11 @@ class NsDateView : TextView {
                         sdf.timeZone = TimeZone.getTimeZone(timezoneID)
                         text = sdf.format(calendar!!.time).replace(" ", "")
                     }
+
                     3 -> {
                         text = monthPicker.value.toString()
                     }
+
                     4 -> {
                         text = yearPicker.value.toString()
                     }
