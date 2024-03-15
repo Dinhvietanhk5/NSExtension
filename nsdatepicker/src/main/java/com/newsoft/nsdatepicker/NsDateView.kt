@@ -30,6 +30,7 @@ class NsDateView : TextView {
     var isPast = false
     var minDate = 0L
     var isStart7Day = false
+    var isFírstMonth = false
     var listener: NsDateViewListener? = null
 
     constructor(context: Context) : super(context) {
@@ -53,6 +54,9 @@ class NsDateView : TextView {
         }
         typedArray.getBoolean(R.styleable.NsDateView_isPast, false).let {
             isPast = it
+        }
+        typedArray.getBoolean(R.styleable.NsDateView_isFirstMonth, false).let {
+            isFírstMonth = it
         }
 //        typedArray.getBoolean(R.styleable.NsDateView_start7Day, false).let {
 //            isStart7Day = it
@@ -105,16 +109,20 @@ class NsDateView : TextView {
         val monthPicker = dialog.findViewById<View>(R.id.picker_month) as NumberPicker
         val yearPicker = dialog.findViewById<View>(R.id.picker_year) as NumberPicker
 
-        monthPicker.minValue = 1
+        val monthNow = calendar!!.get(Calendar.MONTH) + 1
+        monthPicker.minValue = if (isPast) monthNow else 1
         monthPicker.maxValue = 12
-        monthPicker.value = calendar!!.get(Calendar.MONTH) + 1
+        monthPicker.value = if (isFírstMonth) 1 else monthNow
+        monthPicker.wrapSelectorWheel = false
 
         if (type == 1) monthPicker.visibility = GONE
 
         val year: Int = calendar!!.get(Calendar.YEAR)
-        yearPicker.minValue = 1000
+        yearPicker.minValue = if (isPast) year else 1900
         yearPicker.maxValue = 2999
         yearPicker.value = year
+        yearPicker.wrapSelectorWheel = false
+
 
         if (type == 3)
             yearPicker.visibility = View.GONE
